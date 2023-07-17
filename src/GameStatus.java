@@ -6,9 +6,10 @@ public class GameStatus {
     private String[] currentWordStatus;
     private String currentWord;
     private List<Character> mistakeLetters = new ArrayList<>();
-    private Dictionary dictionary = new Dictionary();
+
 
     public GameStatus() {
+        Dictionary dictionary = new Dictionary();
         WordGeneration wordGeneration = new WordGeneration(dictionary);
         currentWord = wordGeneration.getWord();
         currentWordStatus = new String[wordGeneration.getWordSize()];

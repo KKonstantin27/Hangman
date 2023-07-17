@@ -1,9 +1,9 @@
 public class GameLogic {
-    private boolean isRepeatedLetter = false;
-    private UserInput userLetter = new UserInput();
+
     public void gameStart() {
         GameStatus gameStatus = new GameStatus();
         char currentLetter;
+        boolean isRepeatedLetter = false;
         while (true) {
             HangmanDrawing.drawHangman(gameStatus);
             if (gameStatus.isGameWon()) {
@@ -16,12 +16,14 @@ public class GameLogic {
             if (isRepeatedLetter) {
                 System.out.println("Вы уже вводили эту букву");
             }
+            UserInput userLetter = new UserInput();
             currentLetter = userLetter.userInput();
             boolean isGuessLetter = false;
             isRepeatedLetter = false;
             for (int i = 0; i < gameStatus.getCurrentWord().length(); i++) {
                 if (gameStatus.getCurrentWord().charAt(i) == currentLetter) {
                     isGuessLetter = true;
+                    break;
                 }
             }
             for (int i = 0; i < gameStatus.getCurrentWordStatus().length; i++) {
@@ -37,7 +39,7 @@ public class GameLogic {
                 }
             }
             if (isRepeatedLetter) {
-
+                continue;
             } else if (!isGuessLetter) {
                 gameStatus.setMistakeCounter(gameStatus.getMistakeCounter() + 1);
                 gameStatus.getMistakeLetters().add(currentLetter);
